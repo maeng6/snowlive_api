@@ -2,7 +2,16 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+from dotenv import load_dotenv
 
+# BASE_DIR을 정의합니다
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# .env 파일 경로를 정의합니다
+dotenv_path = os.path.join(BASE_DIR, '.env')
+
+# .env 파일을 로드합니다
+load_dotenv(dotenv_path)
 
 def main():
     """Run administrative tasks."""
