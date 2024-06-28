@@ -82,12 +82,15 @@ WSGI_APPLICATION = 'snowlive.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-import dj_database_url
-
 DATABASES = {
-    'default': dj_database_url.config(
-        default=env('CLEARDB_DATABASE_URL', default='mysql://b72db6db36294f:ea9118b3@us-cluster-east-01.k8s.cleardb.net/heroku_1672c264c8a5662')
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': env('DB_NAME', default='heroku_1672c264c8a5662'),
+        'USER': env('DB_USER', default='b72db6db36294f'),
+        'PASSWORD': env('DB_PASSWORD', default='ea9118b3'),
+        'HOST': env('DB_HOST', default='us-cluster-east-01.k8s.cleardb.net'),
+        'PORT': env('DB_PORT', default='3306'),
+    }
 }
 
 # Password validation
