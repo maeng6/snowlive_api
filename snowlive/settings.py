@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 import environ
-import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -83,9 +82,11 @@ WSGI_APPLICATION = 'snowlive.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+import dj_database_url
+
 DATABASES = {
     'default': dj_database_url.config(
-        default=env('CLEARDB_DATABASE_URL')
+        default=env('CLEARDB_DATABASE_URL', default='mysql://b72db6db36294f:ea9118b3@us-cluster-east-01.k8s.cleardb.net/heroku_1672c264c8a5662')
     )
 }
 
