@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.gis.db import models as gis_models
 
 class Resort_info(models.Model):
     resort_id = models.AutoField(primary_key=True)
