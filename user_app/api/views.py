@@ -2,7 +2,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from rest_framework import status
-from user_app.models import CustomUser
+from user_app.models import User
 from rest_framework import generics
 from firebase_admin import auth
 from user_app.api.serializers import RegistrationSerializer
@@ -14,7 +14,7 @@ def logout_view(request):
         return Response(status=status.HTTP_200_OK)
 
 class RegisterView(generics.CreateAPIView):
-    queryset = CustomUser.objects.all()
+    queryset = User.objects.all()
     serializer_class = RegistrationSerializer
 
     def create(self, request, *args, **kwargs):

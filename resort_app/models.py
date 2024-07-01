@@ -1,16 +1,38 @@
 from django.db import models
+from django.contrib.gis.db import models as gis_models
 
-class ResortInfo(models.Model):
-    resortNum = models.IntegerField(default=1)
-    fullName=models.CharField(max_length=100)
-    nickName=models.CharField(max_length=100)
-    latitude=models.DecimalField(max_digits=10,decimal_places=7)
-    longitude=models.DecimalField(max_digits=10,decimal_places=7)
-    resortHomeUrl=models.CharField(max_length=255)
-    webcamUrl=models.CharField(max_length=255)
-    slopeUrl=models.CharField(max_length=255)
-    naverUrl=models.CharField(max_length=255)
-    busUrl =models.CharField(max_length=255)
+class Resort_info(models.Model):
+    resort_id = models.AutoField(primary_key=True)
+    fullname = models.CharField(max_length=100)
+    nickname = models.CharField(max_length=100)
+    coordinates = gis_models.PointField(null=True, blank=True)
+    radius = models.FloatField(default=0)
+    resortHomeUrl = models.CharField(max_length=255)
+    url_naver = models.CharField(max_length=255)
+    url_webcam = models.CharField(max_length=255)
+    url_slope = models.CharField(max_length=255)
+    url_bus = models.CharField(max_length=255)
 
-    def __str__(self):
-        return self.nickName
+class Slope_info(models.Model):
+    slope_id = models.AutoField(primary_key=True)
+    resort_id = models.ForeignKey('resort_app.Resort_info', on_delete=models.SET_NULL, null=True, blank=True)  # default 제거
+    fullname = models.CharField(max_length=100)
+    nickname = models.CharField(max_length=100)
+    coordinates = gis_models.PointField(null=True, blank=True)
+    radius = models.FloatField(default=0)
+    slope_avg = models.FloatField(default=0)
+    length = models.FloatField(default=0)
+    score = models.FloatField(default=0)
+
+class Reset_point(models.Model):
+    reset_point_id = models.AutoField(primary_key=True)
+    resort_id = models.ForeignKey('resort_app.Resort_info', on_delete=models.SET_NULL, null=True, blank=True)  # default 제거
+    coordinates = gis_models.PointField(null=True, blank=True)
+    radius = models.FloatField(default=0)
+
+class Respawn_point(models.Model):
+    reset_point_id = models.AutoField(primary_key=True)
+    resort_id = models.ForeignKey('resort_app.Resort_info', on_delete=models.SET_NULL, null=True, blank=True)  # default 제거
+    coordinates = gis_models.PointField(null=True, blank=True)
+    radius = models.FloatField(default=0)
+

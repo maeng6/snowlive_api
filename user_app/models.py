@@ -1,14 +1,13 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-from resort_app.models import ResortInfo
-
-class CustomUser(AbstractUser):
+class User(AbstractUser):
+    user_id = models.AutoField(primary_key=True)
     uid = models.CharField(max_length=255, unique=True)
-    username = models.CharField(max_length=255, unique=True, null=True, blank=True)  # username 필드
-    email = models.EmailField(unique=True)  # email 필드 추가
-    favoriteResort = models.ForeignKey(ResortInfo,default=1,on_delete=models.SET_DEFAULT)
-
-
+    display_name = models.CharField(max_length=255, unique=True)
+    crew_id = models.ForeignKey('crew_app.Crew_info', on_delete=models.SET_NULL, null=True, blank=True)
+    email = models.EmailField(unique=True)
+    favoriteResort = models.ForeignKey('resort_app.Resort_info', on_delete=models.SET_NULL, null=True, blank=True)  # default 제거
+    
     def __str__(self):
         return self.email

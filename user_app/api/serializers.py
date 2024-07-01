@@ -1,9 +1,9 @@
 from rest_framework import serializers
-from user_app.models import CustomUser
+from user_app.models import User
 
 class RegistrationSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CustomUser
+        model = User
         fields = ['uid', 'username', 'email','favoriteResort']
         extra_kwargs = {
             'uid': {'required': True},
@@ -13,12 +13,12 @@ class RegistrationSerializer(serializers.ModelSerializer):
         }
 
     def create(self, validated_data):
-        if CustomUser.objects.filter(email=validated_data['email']).exists():
+        if User.objects.filter(email=validated_data['email']).exists():
             raise serializers.ValidationError({'error': 'Email already exists!'})
-        if CustomUser.objects.filter(username=validated_data['username']).exists():
+        if User.objects.filter(username=validated_data['username']).exists():
             raise serializers.ValidationError({'error': 'Username already exists!'})
 
-        user = CustomUser.objects.create(
+        user = User.objects.create(
             uid=validated_data['uid'],
             username=validated_data['username'],
             email=validated_data['email'],
