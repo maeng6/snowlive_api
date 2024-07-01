@@ -15,7 +15,7 @@ class Resort_info(models.Model):
 
 class Slope_info(models.Model):
     slope_id = models.AutoField(primary_key=True)
-    resort_id = models.ForeignKey('resort_app.Resort_info', on_delete=models.SET_NULL, null=True, blank=True)  # default 제거
+    resort_id = models.ForeignKey(Resort_info, on_delete=models.SET_NULL, null=True, blank=True)
     fullname = models.CharField(max_length=100)
     nickname = models.CharField(max_length=100)
     lat = models.DecimalField(max_digits=9, decimal_places=6, default=0.000000)
@@ -27,15 +27,14 @@ class Slope_info(models.Model):
 
 class Reset_point(models.Model):
     reset_point_id = models.AutoField(primary_key=True)
-    resort_id = models.ForeignKey('resort_app.Resort_info', on_delete=models.SET_NULL, null=True, blank=True)  # default 제거
+    resort_id = models.ForeignKey(Resort_info, on_delete=models.SET_NULL, null=True, blank=True)
     lat = models.DecimalField(max_digits=9, decimal_places=6, default=0.000000)
     lon = models.DecimalField(max_digits=9, decimal_places=6, default=0.000000)
     radius = models.FloatField(default=0)
 
 class Respawn_point(models.Model):
     reset_point_id = models.AutoField(primary_key=True)
-    resort_id = models.ForeignKey('resort_app.Resort_info', on_delete=models.SET_NULL, null=True, blank=True)  # default 제거
+    resort_id = models.ForeignKey(Resort_info, on_delete=models.SET_NULL, null=True, blank=True)
     lat = models.DecimalField(max_digits=9, decimal_places=6, default=0.000000)
     lon = models.DecimalField(max_digits=9, decimal_places=6, default=0.000000)
     radius = models.FloatField(default=0)
-
