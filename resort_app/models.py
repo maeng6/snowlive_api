@@ -5,7 +5,8 @@ class Resort_info(models.Model):
     resort_id = models.AutoField(primary_key=True)
     fullname = models.CharField(max_length=100)
     nickname = models.CharField(max_length=100)
-    coordinates = gis_models.PointField(null=True, blank=True)
+    lat = models.DecimalField(max_digits=9, decimal_places=6, default=0.000000)
+    lon = models.DecimalField(max_digits=9, decimal_places=6, default=0.000000)
     radius = models.FloatField(default=0)
     resortHomeUrl = models.CharField(max_length=255)
     url_naver = models.CharField(max_length=255)
@@ -18,7 +19,8 @@ class Slope_info(models.Model):
     resort_id = models.ForeignKey('resort_app.Resort_info', on_delete=models.SET_NULL, null=True, blank=True)  # default 제거
     fullname = models.CharField(max_length=100)
     nickname = models.CharField(max_length=100)
-    coordinates = gis_models.PointField(null=True, blank=True)
+    lat = models.DecimalField(max_digits=9, decimal_places=6, default=0.000000)
+    lon = models.DecimalField(max_digits=9, decimal_places=6, default=0.000000)
     radius = models.FloatField(default=0)
     slope_avg = models.FloatField(default=0)
     length = models.FloatField(default=0)
@@ -27,12 +29,14 @@ class Slope_info(models.Model):
 class Reset_point(models.Model):
     reset_point_id = models.AutoField(primary_key=True)
     resort_id = models.ForeignKey('resort_app.Resort_info', on_delete=models.SET_NULL, null=True, blank=True)  # default 제거
-    coordinates = gis_models.PointField(null=True, blank=True)
+    lat = models.DecimalField(max_digits=9, decimal_places=6, default=0.000000)
+    lon = models.DecimalField(max_digits=9, decimal_places=6, default=0.000000)
     radius = models.FloatField(default=0)
 
 class Respawn_point(models.Model):
     reset_point_id = models.AutoField(primary_key=True)
     resort_id = models.ForeignKey('resort_app.Resort_info', on_delete=models.SET_NULL, null=True, blank=True)  # default 제거
-    coordinates = gis_models.PointField(null=True, blank=True)
+    lat = models.DecimalField(max_digits=9, decimal_places=6, default=0.000000)
+    lon = models.DecimalField(max_digits=9, decimal_places=6, default=0.000000)
     radius = models.FloatField(default=0)
 
