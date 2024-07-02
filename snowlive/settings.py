@@ -77,9 +77,9 @@ WSGI_APPLICATION = 'snowlive.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': env('DB_NAME', default='heroku_1672c264c8a5662'),
-        'USER': env('DB_USER', default='b72db6db36294f'),
-        'PASSWORD': env('DB_PASSWORD', default='ea9118b3'),
+        'NAME': env('DB_NAME', default='heroku_2d2ebf0ea29fc2a'),
+        'USER': env('DB_USER', default='b6f33cf711cf2f'),
+        'PASSWORD': env('DB_PASSWORD', default='da79e1ff'),
         'HOST': env('DB_HOST', default='us-cluster-east-01.k8s.cleardb.net'),
         'PORT': env('DB_PORT', default='3306'),
     }
